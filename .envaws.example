@@ -1,0 +1,28 @@
+# What backend to use to read the config
+# Valid values: ssm|s3|file
+service: ssm
+
+# If service is set to 'file', where to look for it
+filePath: ./config.json
+
+# Which parameters we are looking for (case-sensitive)
+# Valid values: list of strings
+params:
+  - SOME_PARAM
+
+# How often (in seconds) to poll the service to check for
+# new config values
+interval: 15
+
+# What to do when encountering a changed config.
+# Valid values: exit
+# - 'exit' terminate the process being monitored and then ourselves,
+#   with the expectation that some higher level mechanism will handle
+#   restarting us
+# - TODO: 'restart' restarts the process being monitored without exiting
+#   ourselves, injecting new env variables
+restartPolicy: exit
+
+# How long to wait (in seconds) between sending the monitored process
+# a SIGTERM (soft kill) and SIGKILL (hard kill)
+softKillTimeout: 30
